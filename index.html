@@ -1,116 +1,85 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lidia Puig</title>
+<title>vibe coding session 01 !</title>
 <style>
   * { box-sizing: border-box; }
+  :root {
+    --bg: #26282b;
+    --fg: #e8eaec;
+    --accent: #8ba3b8;
+  }
   body {
     margin: 0;
-    background: #f4f6f8;
-    color: #1f2a33;
-    font-family: Georgia, "Times New Roman", serif;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Courier New", Courier, monospace;
   }
 
-  /* Cabecera con degradado azul grisáceo */
+  /* Cabecera */
   header {
-    background: linear-gradient(135deg, #3d5266 0%, #6b87a0 50%, #a9bccb 100%);
-    color: #fff;
     text-align: center;
-    padding: 5rem 1.5rem;
+    padding: 5rem 1.5rem 3rem;
+    border-bottom: 2px solid var(--accent);
+    max-width: 1100px;
+    margin: 0 auto;
   }
   header h1 {
     margin: 0;
-    font-weight: normal;
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    letter-spacing: 0.04em;
+    font-size: clamp(2rem, 7vw, 4rem);
+    font-weight: bold;
+    letter-spacing: 0.03em;
+    color: var(--accent);
+  }
+  header p {
+    margin: 1rem 0 0;
+    font-size: clamp(1rem, 3.5vw, 1.5rem);
+    color: var(--fg);
   }
 
-  /* Sección de proyectos */
+  /* Zona de la foto: rejilla de 3 columnas */
   main {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 3rem 1.5rem;
+    padding: 3rem 1.5rem 4rem;
   }
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
   }
-  .card {
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(31, 42, 51, 0.1);
-  }
-  .photo {
-    aspect-ratio: 4 / 3;
-    background: #d5dde4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #6b87a0;
-    font-family: Arial, sans-serif;
-    font-size: 0.9rem;
-  }
-  .photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .info { padding: 1.2rem; }
-  .info h2 { margin: 0 0 0.5rem; font-size: 1.3rem; font-weight: normal; }
-  .info p {
+  .foto {
+    grid-column: span 3;   /* cambia el 3 por 2 si la quieres más estrecha */
     margin: 0;
-    font-family: Arial, sans-serif;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: #556470;
+  }
+  .foto img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+    border: 2px solid var(--accent);
   }
 
-  /* En móvil: una columna; en tablet: dos */
-  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr; }
+    .foto { grid-column: span 1; }
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Lidia Puig</h1>
+  <h1>vibe coding session 01 !</h1>
+  <p>with Lidia and Constança</p>
 </header>
 
 <main>
   <div class="grid">
-
-    <!-- PROYECTO 1 -->
-    <article class="card">
-      <div class="photo">Foto del proyecto</div>
-      <div class="info">
-        <h2>Título del proyecto</h2>
-        <p>Aquí va la descripción de tu proyecto.</p>
-      </div>
-    </article>
-
-    <!-- PROYECTO 2 -->
-    <article class="card">
-      <div class="photo">Foto del proyecto</div>
-      <div class="info">
-        <h2>Título del proyecto</h2>
-        <p>Aquí va la descripción de tu proyecto.</p>
-      </div>
-    </article>
-
-    <!-- PROYECTO 3 -->
-    <article class="card">
-      <div class="photo">Foto del proyecto</div>
-      <div class="info">
-        <h2>Título del proyecto</h2>
-        <p>Aquí va la descripción de tu proyecto.</p>
-      </div>
-    </article>
-
+    <figure class="foto">
+      <img src="foto.png" alt="Lidia y Constança en la primera clase de vibe coding">
+    </figure>
   </div>
 </main>
 
