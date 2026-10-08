@@ -1,4 +1,37 @@
-<h1>Hello world!!!</h1>
-
-
-
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hola mundo</title>
+<style>
+  :root {
+    --bg: #fafaf7;
+    --fg: #1a1a1a;
+    --muted: #666;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #151515; --fg: #f2f2ee; --muted: #a0a0a0; }
+  }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: Georgia, "Times New Roman", serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1.5rem;
+    box-sizing: border-box;
+  }
+  h1 { font-size: clamp(2rem, 8vw, 4rem); margin: 0 0 .5rem; font-weight: normal; }
+  p { font-size: clamp(1.1rem, 4vw, 1.6rem); margin: 0; color: var(--muted); }
+</style>
+</head>
+<body>
+  <h1>Hola mundo, me llamo Lidia</h1>
+  <p>Soy de Barcelona</p>
+</body>
+</html>
