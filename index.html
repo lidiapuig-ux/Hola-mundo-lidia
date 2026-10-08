@@ -1,87 +1,119 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>vibe coding session 01 !</title>
+<title>La danse</title>
 <style>
-  * { box-sizing: border-box; }
-  :root {
-    --bg: #26282b;
-    --fg: #e8eaec;
-    --accent: #8ba3b8;
-  }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--fg);
-    font-family: "Courier New", Courier, monospace;
-  }
-
-  /* Cabecera */
-  header {
-    text-align: center;
-    padding: 5rem 1.5rem 3rem;
-    border-bottom: 2px solid var(--accent);
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  header h1 {
-    margin: 0;
-    font-size: clamp(2rem, 7vw, 4rem);
-    font-weight: bold;
-    letter-spacing: 0.03em;
-    color: var(--accent);
-  }
-  header p {
-    margin: 1rem 0 0;
-    font-size: clamp(1rem, 3.5vw, 1.5rem);
-    color: var(--fg);
-  }
-
-  /* Zona de la foto: rejilla de 3 columnas */
-  main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 3rem 1.5rem 4rem;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-  .foto {
-    grid-column: span 3;   /* cambia el 3 por 2 si la quieres más estrecha */
-    margin: 0;
-  }
-  .foto img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 6px;
-    border: 2px solid var(--accent);
-  }
-
-  @media (max-width: 600px) {
-    .grid { grid-template-columns: 1fr; }
-    .foto { grid-column: span 1; }
-  }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #1f45a8; }
+  svg { display: block; width: 100vw; height: 100vh; overflow: visible; }
 </style>
 </head>
 <body>
 
-<header>
-  <h1>vibe coding session 01 !</h1>
-  <p>with Lidia and Constança</p>
-</header>
+<svg id="escena" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cielo azul (se extiende más allá del marco) -->
+  <rect x="-3000" y="-3000" width="7000" height="6000" fill="#1f45a8"/>
 
-<main>
-  <div class="grid">
-    <figure class="foto">
-      <img src="foto.png" alt="Lidia y Constança en la primera clase de vibe coding">
-    </figure>
-  </div>
-</main>
+  <!-- Colina verde, estilo Matisse -->
+  <path d="M -3000 560 C -300 520, 150 420, 520 470 S 1000 600, 3000 540 L 3000 3000 L -3000 3000 Z" fill="#2f8f3b"/>
+  <path d="M 300 3000 C 450 640, 700 560, 1100 600 S 1800 700, 3000 650 L 3000 3000 Z" fill="#25763a"/>
 
+  <g id="brazos"></g>
+  <g id="bailarines"></g>
+</svg>
+
+<script>
+(function () {
+  var NS = "http://www.w3.org/2000/svg";
+  var CUERPO = "#e0522c";   /* rojo anaranjado, como las figuras del cuadro */
+  var AMARILLO = "#f4c430";
+
+  /* Las tres cabezas (sin cara, como en Matisse), con su pelo y detalles */
+  var CABEZAS = [
+    /* 1: pelo mullet oscuro, gafas amarillas y bigote */
+    '<path d="M-44 -4 Q-62 34 -50 66 L-26 40 Z" fill="#2a1b17"/>' +
+    '<path d="M44 -4 Q62 34 50 66 L26 40 Z" fill="#2a1b17"/>' +
+    '<circle r="42" fill="' + CUERPO + '"/>' +
+    '<path d="M-47 -6 Q-58 -52 0 -54 Q58 -52 47 -6 Q38 -30 0 -28 Q-38 -30 -47 -6 Z" fill="#2a1b17"/>' +
+    '<g fill="none" stroke="' + AMARILLO + '" stroke-width="5"><rect x="-31" y="-6" width="25" height="18" rx="6"/><rect x="6" y="-6" width="25" height="18" rx="6"/><path d="M-6 0 H6"/></g>' +
+    '<path d="M-18 22 Q-9 15 0 20 Q9 15 18 22 Q9 24 0 25 Q-9 24 -18 22 Z" fill="#2a1b17"/>',
+
+    /* 2: pelo largo castaño con la raya en medio */
+    '<path d="M-48 -6 Q-56 -52 0 -56 Q56 -52 48 -6 Q58 40 44 70 L-44 70 Q-58 40 -48 -6 Z" fill="#5a3b28"/>' +
+    '<circle r="42" fill="' + CUERPO + '"/>' +
+    '<path d="M-44 -8 Q-40 -50 0 -52 Q40 -50 44 -8 Q24 -38 0 -34 Q-24 -38 -44 -8 Z" fill="#5a3b28"/>',
+
+    /* 3: pelo largo con flequillo y aro amarillo */
+    '<path d="M-50 -6 Q-58 -54 0 -58 Q58 -54 50 -6 Q60 40 46 72 L-46 72 Q-60 40 -50 -6 Z" fill="#4a3023"/>' +
+    '<circle r="42" fill="' + CUERPO + '"/>' +
+    '<path d="M-44 -12 Q-34 -56 0 -54 Q34 -56 44 -12 Q22 -4 0 -2 Q-22 -4 -44 -12 Z" fill="#4a3023"/>' +
+    '<circle cx="46" cy="24" r="10" fill="none" stroke="' + AMARILLO + '" stroke-width="4"/>'
+  ];
+
+  var CX = 500, CY = 465, RX = 270, RY = 80;
+  var N = CABEZAS.length;
+  var capaBrazos = document.getElementById("brazos");
+  var capaBaila = document.getElementById("bailarines");
+
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  var d = [], brazos = [];
+  for (var i = 0; i < N; i++) {
+    var g = el("g", {}, capaBaila);
+    var pierna1 = el("path", { fill: "none", stroke: CUERPO, "stroke-width": 32, "stroke-linecap": "round" }, g);
+    var pierna2 = el("path", { fill: "none", stroke: CUERPO, "stroke-width": 32, "stroke-linecap": "round" }, g);
+    el("path", { d: "M-46 -112 Q0 -134 46 -112 Q44 -50 30 0 L-30 0 Q-44 -50 -46 -112 Z", fill: CUERPO }, g);
+    var cabeza = el("g", { transform: "translate(0,-152)" }, g);
+    cabeza.innerHTML = CABEZAS[i];
+    d.push({ g: g, p1: pierna1, p2: pierna2, cabeza: cabeza });
+    brazos.push(el("path", { fill: "none", stroke: CUERPO, "stroke-width": 30, "stroke-linecap": "round" }, capaBrazos));
+  }
+
+  function dibuja(t) {
+    var pos = [];
+    for (var i = 0; i < N; i++) {
+      var a = Math.PI / 2 + i * 2 * Math.PI / N + Math.sin(t * 0.0009 + i) * 0.09;
+      var s = 0.85 + 0.25 * (Math.sin(a) + 1) / 2;       /* más grande delante */
+      var fase = t * 0.008 + i * 2;
+      var bote = -Math.abs(Math.sin(fase)) * 14 * s;
+      var x = CX + RX * Math.cos(a);
+      var y = CY + RY * Math.sin(a) + bote;
+      pos.push({ x: x, y: y, s: s, base: CY + RY * Math.sin(a) });
+
+      var o = d[i];
+      o.g.setAttribute("transform", "translate(" + x.toFixed(1) + "," + y.toFixed(1) + ") scale(" + s.toFixed(3) + ") rotate(" + (Math.sin(fase * 0.5) * 6).toFixed(1) + ")");
+      var k1 = Math.sin(fase), k2 = Math.sin(fase + Math.PI);
+      o.p1.setAttribute("d", "M-14 0 Q" + (-30 + k1 * 22) + " 55 " + (-34 + k1 * 48) + " " + (122 - Math.max(0, k1) * 42));
+      o.p2.setAttribute("d", "M14 0 Q" + (30 + k2 * 22) + " 55 " + (34 + k2 * 48) + " " + (122 - Math.max(0, k2) * 42));
+      o.cabeza.setAttribute("transform", "translate(0,-152) rotate(" + (Math.sin(fase * 0.5) * 7).toFixed(1) + ")");
+    }
+
+    /* Brazos: cada bailarín da la mano al siguiente */
+    for (var j = 0; j < N; j++) {
+      var p = pos[j], q = pos[(j + 1) % N];
+      var x1 = p.x, y1 = p.y - 104 * p.s;
+      var x2 = q.x, y2 = q.y - 104 * q.s;
+      var mx = (x1 + x2) / 2, my = (y1 + y2) / 2 + 70 * (p.s + q.s) / 2 + Math.sin(t * 0.004 + j) * 14;
+      brazos[j].setAttribute("d", "M" + x1.toFixed(1) + " " + y1.toFixed(1) + " Q" + mx.toFixed(1) + " " + my.toFixed(1) + " " + x2.toFixed(1) + " " + y2.toFixed(1));
+    }
+
+    /* Primero se dibujan los que están detrás */
+    var orden = d.map(function (o, i) { return { o: o, y: pos[i].base }; })
+                 .sort(function (a, b) { return a.y - b.y; });
+    orden.forEach(function (r) { capaBaila.appendChild(r.o.g); });
+  }
+
+  var quieto = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (quieto) { dibuja(0); return; }
+  function bucle(t) { dibuja(t); requestAnimationFrame(bucle); }
+  requestAnimationFrame(bucle);
+})();
+</script>
 </body>
 </html>
