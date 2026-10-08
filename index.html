@@ -2,36 +2,117 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Hola mundo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lidia Puig</title>
 <style>
-  :root {
-    --bg: #fafaf7;
-    --fg: #1a1a1a;
-    --muted: #666;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg: #151515; --fg: #f2f2ee; --muted: #a0a0a0; }
-  }
-  html, body { height: 100%; margin: 0; }
+  * { box-sizing: border-box; }
   body {
-    background: var(--bg);
-    color: var(--fg);
+    margin: 0;
+    background: #f4f6f8;
+    color: #1f2a33;
     font-family: Georgia, "Times New Roman", serif;
+  }
+
+  /* Cabecera con degradado azul grisáceo */
+  header {
+    background: linear-gradient(135deg, #3d5266 0%, #6b87a0 50%, #a9bccb 100%);
+    color: #fff;
+    text-align: center;
+    padding: 5rem 1.5rem;
+  }
+  header h1 {
+    margin: 0;
+    font-weight: normal;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    letter-spacing: 0.04em;
+  }
+
+  /* Sección de proyectos */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(31, 42, 51, 0.1);
+  }
+  .photo {
+    aspect-ratio: 4 / 3;
+    background: #d5dde4;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    padding: 1.5rem;
-    box-sizing: border-box;
+    color: #6b87a0;
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
   }
-  h1 { font-size: clamp(2rem, 8vw, 4rem); margin: 0 0 .5rem; font-weight: normal; }
-  p { font-size: clamp(1.1rem, 4vw, 1.6rem); margin: 0; color: var(--muted); }
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .info { padding: 1.2rem; }
+  .info h2 { margin: 0 0 0.5rem; font-size: 1.3rem; font-weight: normal; }
+  .info p {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #556470;
+  }
+
+  /* En móvil: una columna; en tablet: dos */
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
-  <h1>Hola mundo, me llamo Lidia</h1>
-  <p>Soy de Barcelona</p>
+
+<header>
+  <h1>Lidia Puig</h1>
+</header>
+
+<main>
+  <div class="grid">
+
+    <!-- PROYECTO 1 -->
+    <article class="card">
+      <div class="photo">Foto del proyecto</div>
+      <div class="info">
+        <h2>Título del proyecto</h2>
+        <p>Aquí va la descripción de tu proyecto.</p>
+      </div>
+    </article>
+
+    <!-- PROYECTO 2 -->
+    <article class="card">
+      <div class="photo">Foto del proyecto</div>
+      <div class="info">
+        <h2>Título del proyecto</h2>
+        <p>Aquí va la descripción de tu proyecto.</p>
+      </div>
+    </article>
+
+    <!-- PROYECTO 3 -->
+    <article class="card">
+      <div class="photo">Foto del proyecto</div>
+      <div class="info">
+        <h2>Título del proyecto</h2>
+        <p>Aquí va la descripción de tu proyecto.</p>
+      </div>
+    </article>
+
+  </div>
+</main>
+
 </body>
 </html>
